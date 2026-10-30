@@ -26,6 +26,14 @@ Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm
 - Laravel çekirdeği `public_html` dışında, `public` içeriği `public_html` içinde.
 - FTP kökü hesabın ev dizinidir. Deploy hedefleri yalnızca `/yaren` (Laravel çekirdeği) ve `/public_html` (public içeriği). Diğer klasörlere dokunulmaz, VS Code "Upload Project" kullanılmaz.
 - `public_html/.htaccess` içindeki cPanel PHP satırı korunur; Laravel'in `.htaccess` içeriğiyle birleştirilir, üzerine yazılmaz.
+- Admin yüklemeleri `public_path('uploads')` altına gider, çünkü sunucuda symlink yok.
+
+## Deploy
+
+- `npm run deploy`: commit'li son sürümü derler, yalnızca değişen dosyaları yükler.
+- `npm run deploy -- --dry-run`: yüklenecek ve silinecek dosyaları listeler, sunucuya yazmaz.
+- `npm run deploy -- --env`: `.env.production` dosyasını `/yaren/.env` olarak da yükler.
+- `npm run deploy -- --htaccess`: `deploy/htaccess.production` dosyasını `/public_html/.htaccess` olarak da yükler.
 
 ## Lokal ortam
 
@@ -42,7 +50,7 @@ Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm
 ## Çalışma kuralları
 
 - Her adım tek commit (Conventional Commits, İngilizce) ve push.
-- Şifreler yalnızca `.env` ve `.vscode/sftp.json` içinde.
+- Şifreler yalnızca `.env`, `.env.production`, `.env.deploy` ve `.vscode/sftp.json` içinde.
 - Sunucuya dosya yükleme ve silme yalnızca açıkça istendiğinde.
 - Geçici dosyalar adım sonunda silinir.
 - Her adım sonunda değişen dosyalar, test sonuçları ve bilinen eksikler raporlanır.
