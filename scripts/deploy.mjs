@@ -179,7 +179,24 @@ async function connect(env) {
     return client;
 }
 
+async function remoteFileExists(client, path) {
+    try {
+        await client.size(path);
+
+        return true;
+    } catch (error) {
+        if (error.code === 550) {
+            return false;
+        }
+        throw error;
+    }
+}
+
 async function readRemoteManifest(client) {
+    if (!(await remoteFileExists(client, MANIFEST_PATH))) {
+        return {};
+    }
+
     const chunks = [];
     const sink = new Writable({
         write(chunk, _encoding, done) {
@@ -188,14 +205,7 @@ async function readRemoteManifest(client) {
         },
     });
 
-    try {
-        await client.downloadTo(sink, MANIFEST_PATH);
-    } catch (error) {
-        if (error.code === 550) {
-            return {};
-        }
-        throw error;
-    }
+    await client.downloadTo(sink, MANIFEST_PATH);
 
     return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
