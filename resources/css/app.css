@@ -6,7 +6,6 @@
 
 @source '../views';
 @source '../js';
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme inline {
   --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
@@ -97,7 +96,6 @@
   }
 }
 
-/* Film grain overlay */
 .grain::after {
   content: '';
   position: fixed;

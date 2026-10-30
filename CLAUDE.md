@@ -15,8 +15,7 @@ Kapsam ve yol haritası: `docs/PROJECT_SCOPE.md`, `docs/ROADMAP.md`.
 
 ## Tasarım kaynağı
 
-`_design-reference/` içindeki Next.js çıktısı. Görünüm, metinler, renkler ve animasyonlar birebir korunacak.
-Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm install` yapılmaz.
+Tasarımın tek kaynağı mevcut koddur (`resources/views`, `resources/css/app.css`). Görünüm, metinler, renkler ve animasyonlar korunur.
 
 ## Sunucu kısıtları
 
