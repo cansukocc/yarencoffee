@@ -18,6 +18,7 @@ const CONNECTIONS = 2;
 const BATCH_SIZE = 200;
 const MAX_ATTEMPTS = 3;
 const FTP_TIMEOUT = 60_000;
+const MAX_LISTED_UPLOADS = 20;
 
 const CORE_SOURCES = [
     'app',
@@ -40,6 +41,11 @@ const WRITABLE_DIRS = [
     'storage/app/public',
     'bootstrap/cache',
 ];
+
+const ORDER_INDEPENDENT_FILES = new Set([
+    `${CORE_ROOT}/vendor/composer/autoload_psr4.php`,
+    `${CORE_ROOT}/vendor/composer/autoload_static.php`,
+]);
 
 const PROTECTED_SEGMENTS = new Set(['..', '.htaccess', '.well-known', 'storage', 'uploads']);
 
@@ -94,10 +100,18 @@ async function walk(path) {
     return nested.flat();
 }
 
+function fingerprint(remote, content) {
+    const hashed = ORDER_INDEPENDENT_FILES.has(remote)
+        ? content.toString('utf8').split('\n').sort().join('\n')
+        : content;
+
+    return createHash('sha256').update(hashed).digest('hex');
+}
+
 async function describeFile(local, remote) {
     const content = await readFile(local);
 
-    return { local, remote, hash: createHash('sha256').update(content).digest('hex'), size: content.length };
+    return { local, remote, hash: fingerprint(remote, content), size: content.length };
 }
 
 async function collectCoreFiles(buildDir) {
@@ -331,6 +345,11 @@ function printPlan({ uploads, deletions, keptStale }) {
     const bytes = uploads.reduce((sum, file) => sum + file.size, 0);
 
     console.log(`Yüklenecek: ${uploads.length} dosya (${(bytes / 1048576).toFixed(1)} MB)`);
+
+    if (uploads.length <= MAX_LISTED_UPLOADS) {
+        uploads.forEach((file) => console.log(`  + ${file.remote}`));
+    }
+
     console.log(`Silinecek: ${deletions.length} dosya`);
     deletions.forEach((path) => console.log(`  - ${path}`));
 
