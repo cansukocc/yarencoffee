@@ -100,9 +100,9 @@ async function walk(path) {
     return nested.flat();
 }
 
-function fingerprint(remote, content) {
+export function fingerprint(remote, content) {
     const hashed = ORDER_INDEPENDENT_FILES.has(remote)
-        ? content.toString('utf8').split('\n').sort().join('\n')
+        ? content.toString('utf8').split(/[\s,()]+/).sort().join('\n')
         : content;
 
     return createHash('sha256').update(hashed).digest('hex');
