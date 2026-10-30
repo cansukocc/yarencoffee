@@ -14,8 +14,6 @@ class ContactFormTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected bool $seed = true;
-
     private array $valid = [
         'name' => 'Ayşe Yılmaz',
         'email' => 'ayse@example.com',
@@ -26,6 +24,7 @@ class ContactFormTest extends TestCase
     {
         parent::setUp();
 
+        $this->seed();
         $this->withoutVite();
         config(['yaren.contact_recipient' => 'coffee@example.com']);
     }

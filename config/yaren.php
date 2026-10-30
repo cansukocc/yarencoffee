@@ -4,6 +4,12 @@ return [
 
     'contact_recipient' => env('CONTACT_RECIPIENT'),
 
+    'admin' => [
+        'name' => env('ADMIN_NAME'),
+        'email' => env('ADMIN_EMAIL'),
+        'password' => env('ADMIN_PASSWORD'),
+    ],
+
     'links' => [
         ['href' => '#hikayemiz', 'label' => 'Hikâyemiz'],
         ['href' => '#kahveler', 'label' => 'Kahveler'],

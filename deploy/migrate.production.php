@@ -2,6 +2,7 @@
 
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
@@ -38,6 +39,9 @@ try {
     echo 'tables: '.implode(', ', Schema::getTableListing(schemaQualified: false))."\n";
     echo 'products: '.Product::count()."\n";
     echo 'settings: '.Setting::count()."\n";
+    echo 'users: '.User::count()."\n";
+    echo 'gd_webp: '.(function_exists('imagewebp') ? 'yes' : 'no')."\n";
+    echo 'upload_max_filesize: '.ini_get('upload_max_filesize')."\n";
     echo "MIGRATE_OK\n";
 } catch (Throwable $exception) {
     http_response_code(500);

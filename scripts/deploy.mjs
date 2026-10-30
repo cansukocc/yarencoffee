@@ -372,18 +372,8 @@ function splitUploads(uploads) {
     };
 }
 
-async function configFiles(flags) {
-    const files = [];
-
-    if (flags.env) {
-        files.push(await describeFile(join(ROOT, '.env.production'), `${CORE_ROOT}/.env`));
-    }
-
-    if (flags.htaccess) {
-        files.push(await describeFile(join(ROOT, 'deploy/htaccess.production'), `${PUBLIC_ROOT}/.htaccess`));
-    }
-
-    return files;
+async function optionalFile(enabled, local, remote) {
+    return enabled ? [await describeFile(local, remote)] : [];
 }
 
 async function removeMigrationFile(slot, remotePath) {
@@ -435,7 +425,10 @@ async function publish(release, plan, remoteManifest, flags, env, slots, buildDi
     const sendFiles = createUploader(env, slots);
     const { core, publicFiles, index } = splitUploads(plan.uploads);
 
+    const announce = (file) => console.log(`Yapılandırma yüklendi: ${file.remote}`);
+
     await ensureWritableDirs(slots[0].client);
+    await sendFiles(await optionalFile(flags.env, join(ROOT, '.env.production'), `${CORE_ROOT}/.env`), announce);
     await uploadRelease(core, manifest, slots, sendFiles);
 
     if (flags.migrate) {
@@ -446,7 +439,7 @@ async function publish(release, plan, remoteManifest, flags, env, slots, buildDi
     }
 
     await uploadRelease(publicFiles, manifest, slots, sendFiles);
-    await sendFiles(await configFiles(flags), (file) => console.log(`Yapılandırma yüklendi: ${file.remote}`));
+    await sendFiles(await optionalFile(flags.htaccess, join(ROOT, 'deploy/htaccess.production'), `${PUBLIC_ROOT}/.htaccess`), announce);
     await uploadRelease(index, manifest, slots, sendFiles);
 
     const client = await ensureConnected(slots[0]);

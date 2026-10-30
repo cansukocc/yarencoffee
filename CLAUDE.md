@@ -36,6 +36,13 @@ Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm
 - `npm run deploy -- --htaccess`: `deploy/htaccess.production` dosyasını `/public_html/.htaccess` olarak da yükler.
 - `npm run deploy -- --migrate`: çekirdek yüklendikten sonra sunucuda `migrate --force` çalıştırır.
 - `npm run deploy -- --seed`: `--migrate` işlemine ek olarak `db:seed --force` çalıştırır. Seeder'lar mevcut veriyi ezmez.
+- `--env` yüklemesi migrate'ten önce yapılır, böylece seeder'lar güncel ayarları görür.
+
+## Yönetim paneli
+
+- Adres: `/yonetim`. Kayıt ve şifre sıfırlama yoktur.
+- Admin kullanıcısı `AdminUserSeeder` ile `ADMIN_NAME`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` değerlerinden oluşur (`php artisan db:seed` veya `--seed`). Var olan kullanıcının şifresi değişmez.
+- Yüklenen görseller `public/uploads/products` altına WebP olarak kaydedilir ve git dışındadır.
 
 ## Lokal ortam
 
