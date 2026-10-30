@@ -14,7 +14,7 @@ const PUBLIC_ROOT = '/public_html';
 const MANIFEST_PATH = `${CORE_ROOT}/.deploy-manifest.json`;
 const INDEX_PATH = `${PUBLIC_ROOT}/index.php`;
 
-const CONNECTIONS = 4;
+const CONNECTIONS = 2;
 const BATCH_SIZE = 200;
 const MAX_ATTEMPTS = 3;
 const FTP_TIMEOUT = 60_000;
@@ -370,9 +370,13 @@ async function publish(release, plan, remoteManifest, flags, env, slots) {
 }
 
 async function openSlots(env) {
-    const clients = await Promise.all(Array.from({ length: CONNECTIONS }, () => connect(env)));
+    const slots = [];
 
-    return clients.map((client) => ({ client, env }));
+    while (slots.length < CONNECTIONS) {
+        slots.push({ client: await connect(env), env });
+    }
+
+    return slots;
 }
 
 async function main() {
