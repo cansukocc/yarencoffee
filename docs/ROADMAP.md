@@ -2,7 +2,7 @@
 
 - [x] 0. Ortam kurulumu
 - [x] 1. Laravel, GitHub, SFTP, dokümanlar
-- [ ] 2. Frontend temeli (tema, fontlar, layout, WebP)
+- [x] 2. Frontend temeli (tema, fontlar, layout, WebP)
 - [ ] 3. Bölümlerin Blade'e taşınması
 - [ ] 4. Veritabanı ve ön yüz bağlantısı
 - [ ] 5. İletişim formu ve e-posta

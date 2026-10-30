@@ -24,6 +24,8 @@ Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm
 - Sunucuda composer, npm ve artisan çalıştırılamaz.
 - Kuyruk işçisi ve cron varsayılmaz (`QUEUE_CONNECTION=sync`).
 - Laravel çekirdeği `public_html` dışında, `public` içeriği `public_html` içinde.
+- FTP kökü hesabın ev dizinidir. Deploy hedefleri yalnızca `/yaren` (Laravel çekirdeği) ve `/public_html` (public içeriği). Diğer klasörlere dokunulmaz, VS Code "Upload Project" kullanılmaz.
+- `public_html/.htaccess` içindeki cPanel PHP satırı korunur; Laravel'in `.htaccess` içeriğiyle birleştirilir, üzerine yazılmaz.
 
 ## Lokal ortam
 
