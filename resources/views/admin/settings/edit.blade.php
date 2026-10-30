@@ -17,6 +17,20 @@
             <x-admin.field label="Telefon" name="contact_phone" :value="$settings['contact_phone'] ?? ''" maxlength="60" required />
         </div>
 
+        <section class="space-y-5 border-t border-border pt-6" aria-labelledby="seo-title">
+            <h2 id="seo-title" class="font-serif text-2xl text-coffee">SEO</h2>
+
+            <div>
+                <x-admin.field label="Sayfa başlığı" name="meta_title" :value="$settings['meta_title'] ?? ''" maxlength="60" required />
+                <p class="mt-2 text-xs text-muted-foreground" data-char-counter="field-meta_title"></p>
+            </div>
+
+            <div>
+                <x-admin.field label="Sayfa açıklaması" name="meta_description" :value="$settings['meta_description'] ?? ''" maxlength="160" textarea required />
+                <p class="mt-2 text-xs text-muted-foreground" data-char-counter="field-meta_description"></p>
+            </div>
+        </section>
+
         <x-admin.button>Kaydet</x-admin.button>
     </form>
 @endsection

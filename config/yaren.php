@@ -10,6 +10,31 @@ return [
         'password' => env('ADMIN_PASSWORD'),
     ],
 
+    'seo' => [
+        'cuisines' => ['Türk kahvesi', 'Espresso', 'Filtre kahve'],
+        'country' => 'TR',
+        'currency' => 'TRY',
+    ],
+
+    'faq' => [
+        [
+            'question' => 'Türk kahvesi nasıl pişirilir?',
+            'answer' => 'İnce çekilmiş kahveyi soğuk suyla cezveye alın, isterseniz şekerini de ekleyin. Kısık ateşte karıştırmadan ısıtın; köpük yükselince fincanlara paylaştırın, kalanını bir kez daha kabartıp üzerine ekleyin.',
+        ],
+        [
+            'question' => 'Espresso ile filtre kahve arasındaki fark nedir?',
+            'answer' => 'Espressoda ince öğütülmüş kahveden basınçlı su geçer ve saniyeler içinde yoğun, kısa bir içim elde edilir. Filtre kahvede su kahveden yavaşça süzülür; sonuç daha hafif, berrak ve uzun bir fincandır.',
+        ],
+        [
+            'question' => 'Bana hangi kahve uygun?',
+            'answer' => 'Köpüklü ve yoğun bir ritüel istiyorsanız Türk kahvesi, kısa ve güçlü bir tat arıyorsanız espresso, yudumlayarak içmeyi seviyorsanız filtre kahve iyi bir başlangıçtır. Kararsızsanız bize yazın, birlikte seçelim.',
+        ],
+        [
+            'question' => 'Toptan sipariş veya etkinlik için nasıl ulaşabilirim?',
+            'answer' => 'Bu sayfadaki iletişim formundan ya da e-posta adresimizden bize yazabilirsiniz. Kişi sayısını ve tarihi belirtirseniz size daha hızlı dönüş yaparız.',
+        ],
+    ],
+
     'links' => [
         ['href' => '#hikayemiz', 'label' => 'Hikâyemiz'],
         ['href' => '#kahveler', 'label' => 'Kahveler'],

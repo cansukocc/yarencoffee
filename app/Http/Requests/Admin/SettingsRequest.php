@@ -15,6 +15,8 @@ class SettingsRequest extends FormRequest
             'contact_address' => 'required|string|max:255',
             'contact_email' => 'required|email:rfc|max:200',
             'contact_phone' => 'required|string|max:60',
+            'meta_title' => 'required|string|max:60',
+            'meta_description' => 'required|string|max:160',
         ];
     }
 
@@ -34,6 +36,10 @@ class SettingsRequest extends FormRequest
             'contact_email.max' => 'E-posta en fazla 200 karakter olabilir.',
             'contact_phone.required' => 'Lütfen telefon numarasını yazın.',
             'contact_phone.max' => 'Telefon en fazla 60 karakter olabilir.',
+            'meta_title.required' => 'Lütfen sayfa başlığını yazın.',
+            'meta_title.max' => 'Sayfa başlığı en fazla 60 karakter olabilir.',
+            'meta_description.required' => 'Lütfen sayfa açıklamasını yazın.',
+            'meta_description.max' => 'Sayfa açıklaması en fazla 160 karakter olabilir.',
         ];
     }
 }

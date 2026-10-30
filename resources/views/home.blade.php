@@ -12,6 +12,7 @@
         @include('sections.products')
         @include('sections.timeline')
         @include('sections.fortune')
+        @include('sections.faq')
         @include('sections.contact')
     </main>
 

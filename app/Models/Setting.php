@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 #[Fillable(['key', 'value'])]
 class Setting extends Model
 {
-    public $incrementing = false;
+    public const CREATED_AT = null;
 
-    public $timestamps = false;
+    public $incrementing = false;
 
     protected $primaryKey = 'key';
 

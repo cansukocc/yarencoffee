@@ -16,6 +16,8 @@ class SettingSeeder extends Seeder
             'contact_address' => 'Moda Caddesi No. 12, Kadıköy / İstanbul',
             'contact_email' => 'merhaba@yaren.coffee',
             'contact_phone' => '+90 212 000 00 00',
+            'meta_title' => 'Yâren | Türk Kahvesi, Espresso ve Filtre Kahve',
+            'meta_description' => "Yâren'de geleneksel Türk kahvesi, espresso ve filtre kahve aynı masada buluşuyor. Bakır cezvede pişen lezzetleri keşfedin, bir fincan sohbete gelin.",
         ];
 
         foreach ($settings as $key => $value) {

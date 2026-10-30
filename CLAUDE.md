@@ -43,6 +43,7 @@ Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm
 - Adres: `/yonetim`. Kayıt ve şifre sıfırlama yoktur.
 - Admin kullanıcısı `AdminUserSeeder` ile `ADMIN_NAME`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` değerlerinden oluşur (`php artisan db:seed` veya `--seed`). Var olan kullanıcının şifresi değişmez.
 - Yüklenen görseller `public/uploads/products` altına WebP olarak kaydedilir ve git dışındadır.
+- SEO başlığı ve açıklaması Site Ayarları'ndan yönetilir (`meta_title`, `meta_description`). JSON-LD `App\Support\StructuredData` ile üretilir.
 
 ## Lokal ortam
 

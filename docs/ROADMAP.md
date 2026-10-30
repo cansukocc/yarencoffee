@@ -9,5 +9,6 @@
 - [x] 5. İletişim formu ve e-posta
 - [x] 6. Yönetim paneli
 - [x] 7. Animasyon, mobil, erişilebilirlik, performans
-- [ ] 8. Son canlı yayın ve doğrulama
+- [x] 7.5 SEO
+- [ ] 8. Son testler
 - [ ] 9. README, temizlik, son push

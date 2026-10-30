@@ -5,9 +5,7 @@
                 <span class="size-1.5 rounded-full bg-olive"></span>
                 {{ $settings['hero_badge'] }}
             </p>
-            <h1 aria-label="Yâren" class="font-serif text-[22vw] leading-[0.85] font-light tracking-tight text-coffee md:text-[11rem]">
-                <span aria-hidden="true">@foreach (mb_str_split('Yâren') as $letter)<span @class(['inline-block', '-ml-[0.06em]' => $loop->index === 1]) data-hero-letter>{{ $letter }}</span>@endforeach</span>
-            </h1>
+            <h1 aria-label="Yâren" class="font-serif text-[22vw] leading-[0.85] font-light tracking-tight text-coffee md:text-[11rem]"><span aria-hidden="true">@foreach (mb_str_split('Yâren') as $letter)<span @class(['inline-block', '-ml-[0.06em]' => $loop->index === 1]) data-hero-letter>{{ $letter }}</span>@endforeach</span></h1>
             <p class="mt-6 max-w-md font-serif text-3xl italic leading-tight text-coffee md:text-4xl" data-hero-item>
                 {{ $settings['slogan'] }}
             </p>

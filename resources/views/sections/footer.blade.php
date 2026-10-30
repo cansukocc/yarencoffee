@@ -26,6 +26,7 @@
 
         <div class="mt-8 flex flex-col justify-between gap-4 border-t border-cream/15 pt-8 text-sm text-cream/60 md:flex-row">
             <p>© 2026 Yâren. Tüm hakları saklıdır.</p>
+            <a href="#sss" class="underline-offset-4 transition-colors hover:text-cream hover:underline">Sıkça Sorulan Sorular</a>
             <p>Kadıköy, İstanbul’da sevgiyle kavrulur.</p>
         </div>
     </div>

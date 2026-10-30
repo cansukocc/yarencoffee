@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /yonetim
+
+Sitemap: https://baghouse.com.tr/sitemap.xml

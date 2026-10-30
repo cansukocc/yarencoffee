@@ -67,7 +67,6 @@ class HomePageTest extends TestCase
 
         $this->get('/')
             ->assertSee('Yeni bir slogan.')
-            ->assertSee('<title>Yâren — Yeni bir slogan</title>', false)
             ->assertDontSee('Her fincanda ortak bir hikâye.');
     }
 
@@ -80,7 +79,7 @@ class HomePageTest extends TestCase
 
         $this->assertSame(3, Product::count());
         $this->assertSame(150, Product::where('name', 'Doppio')->value('price'));
-        $this->assertSame(6, Setting::count());
+        $this->assertSame(8, Setting::count());
         $this->assertSame('Yeni bir slogan.', Setting::find('slogan')->value);
     }
 }

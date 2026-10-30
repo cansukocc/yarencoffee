@@ -17,6 +17,8 @@ class SettingsManagementTest extends TestCase
         'contact_address' => 'Yeni adres',
         'contact_email' => 'yeni@example.com',
         'contact_phone' => '+90 216 000 00 00',
+        'meta_title' => 'Yeni başlık',
+        'meta_description' => 'Yeni açıklama',
     ];
 
     protected function setUp(): void

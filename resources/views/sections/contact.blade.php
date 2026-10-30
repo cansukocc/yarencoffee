@@ -32,7 +32,7 @@
                 @unless (session('contact_success')) hidden @endunless
             >
                 <x-success-cup />
-                <h3 class="mt-6 font-serif text-4xl" data-success-item>Mesajınız yolda.</h3>
+                <p class="mt-6 font-serif text-4xl" data-success-item>Mesajınız yolda.</p>
                 <p class="mt-3 max-w-md leading-relaxed text-cream/85" data-success-item data-contact-success-message>{{ session('contact_success') }}</p>
                 <a href="{{ url('/') }}#iletisim" class="mt-8 text-sm font-semibold underline underline-offset-4" data-success-item data-contact-reset>
                     Yeni mesaj gönder

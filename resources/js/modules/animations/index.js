@@ -1,3 +1,4 @@
+import { animateFaq } from './faq';
 import { animateHero } from './hero';
 import { animateMagnetic } from './magnetic';
 import { animateMarquee } from './marquee';
@@ -25,6 +26,12 @@ export function initAnimations() {
         animateMarquee();
         animateStory();
         animateProgress();
+
+        const controller = new AbortController();
+
+        animateFaq(controller.signal);
+
+        return () => controller.abort();
     });
 
     media.add(FINE_POINTER_QUERY, () => {

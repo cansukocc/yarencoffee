@@ -34,6 +34,20 @@ function initImagePreview() {
     });
 }
 
+function initCharCounters() {
+    document.querySelectorAll('[data-char-counter]').forEach((counter) => {
+        const field = document.getElementById(counter.dataset.charCounter);
+
+        const update = () => {
+            counter.textContent = `${[...field.value].length} / ${field.maxLength} karakter`;
+        };
+
+        field.addEventListener('input', update);
+        update();
+    });
+}
+
 initMenu();
 initDeleteConfirmation();
 initImagePreview();
+initCharCounters();
