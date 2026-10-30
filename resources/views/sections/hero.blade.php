@@ -3,16 +3,16 @@
         <div class="relative z-10 md:col-span-6">
             <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-olive/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-olive animate-in fade-in slide-in-from-bottom-2 duration-700">
                 <span class="size-1.5 rounded-full bg-olive"></span>
-                Est. 2026 · İstanbul
+                {{ $settings['hero_badge'] }}
             </p>
             <h1 class="font-serif text-[22vw] leading-[0.85] font-light tracking-tight text-coffee md:text-[11rem] animate-in fade-in slide-in-from-bottom-6 duration-1000">
                 Yâren
             </h1>
             <p class="mt-6 max-w-md font-serif text-3xl italic leading-tight text-coffee md:text-4xl animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-both">
-                Her fincanda ortak bir hikâye.
+                {{ $settings['slogan'] }}
             </p>
             <p class="mt-5 max-w-md text-base leading-relaxed text-coffee/70 animate-in fade-in duration-1000 delay-300 fill-mode-both">
-                Cezvenin sabrını espressonun cesaretiyle buluşturuyoruz. Kırk yıllık hatıra, bir yudumluk sohbet.
+                {{ $settings['hero_subtitle'] }}
             </p>
             <div class="mt-9 flex flex-wrap items-center gap-4 animate-in fade-in duration-1000 delay-500 fill-mode-both">
                 <a href="#kahveler" class="group inline-flex items-center gap-3 rounded-full bg-olive py-2 pl-7 pr-2 text-sm font-semibold text-cream transition-all hover:bg-coffee">

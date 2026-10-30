@@ -11,15 +11,15 @@
             <ul class="mt-10 space-y-5 text-coffee">
                 <li class="flex items-center gap-4">
                     <span class="flex size-11 items-center justify-center rounded-full border border-coffee/15"><x-icon name="map-pin" class="size-4" /></span>
-                    Moda Caddesi No. 12, Kadıköy / İstanbul
+                    {{ $settings['contact_address'] }}
                 </li>
                 <li class="flex items-center gap-4">
                     <span class="flex size-11 items-center justify-center rounded-full border border-coffee/15"><x-icon name="mail" class="size-4" /></span>
-                    merhaba@yaren.coffee
+                    {{ $settings['contact_email'] }}
                 </li>
                 <li class="flex items-center gap-4">
                     <span class="flex size-11 items-center justify-center rounded-full border border-coffee/15"><x-icon name="phone" class="size-4" /></span>
-                    +90 212 000 00 00
+                    {{ $settings['contact_phone'] }}
                 </li>
             </ul>
         </x-reveal>

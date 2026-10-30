@@ -34,6 +34,8 @@ Bu klasör yalnızca referanstır: içinde hiçbir şey çalıştırılmaz, `npm
 - `npm run deploy -- --dry-run`: yüklenecek ve silinecek dosyaları listeler, sunucuya yazmaz.
 - `npm run deploy -- --env`: `.env.production` dosyasını `/yaren/.env` olarak da yükler.
 - `npm run deploy -- --htaccess`: `deploy/htaccess.production` dosyasını `/public_html/.htaccess` olarak da yükler.
+- `npm run deploy -- --migrate`: çekirdek yüklendikten sonra sunucuda `migrate --force` çalıştırır.
+- `npm run deploy -- --seed`: `--migrate` işlemine ek olarak `db:seed --force` çalıştırır. Seeder'lar mevcut veriyi ezmez.
 
 ## Lokal ortam
 

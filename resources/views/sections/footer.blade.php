@@ -3,7 +3,7 @@
         <div class="flex flex-col justify-between gap-10 md:flex-row md:items-end">
             <div>
                 <x-logo class="text-5xl md:text-6xl" />
-                <p class="mt-4 font-serif text-2xl italic text-cream/70">Her fincanda ortak bir hikâye.</p>
+                <p class="mt-4 font-serif text-2xl italic text-cream/70">{{ $settings['slogan'] }}</p>
             </div>
             <ul class="flex gap-3">
                 @foreach (config('yaren.socials') as $social)

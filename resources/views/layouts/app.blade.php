@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Yâren — Her fincanda ortak bir hikâye</title>
+        <title>Yâren — {{ rtrim($settings['slogan'], '.') }}</title>
         <meta name="description" content="Yâren, geleneksel Türk kahvesini espresso ve modern demleme kültürüyle buluşturan bir kahve markası.">
         <meta name="theme-color" content="#F5F0E6">
         <meta name="color-scheme" content="light">

@@ -45,6 +45,6 @@
                 </li>
             @endforeach
         </ul>
-        <p class="mt-10 font-serif text-lg italic text-coffee/70">Her fincanda ortak bir hikâye.</p>
+        <p class="mt-10 font-serif text-lg italic text-coffee/70">{{ $settings['slogan'] }}</p>
     </div>
 </header>

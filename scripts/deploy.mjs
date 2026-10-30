@@ -1,5 +1,5 @@
 import { execSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { mkdtemp, readFile, readdir, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -9,6 +9,7 @@ import { Client } from 'basic-ftp';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
+const SITE_URL = 'https://baghouse.com.tr';
 const CORE_ROOT = '/yaren';
 const PUBLIC_ROOT = '/public_html';
 const MANIFEST_PATH = `${CORE_ROOT}/.deploy-manifest.json`;
@@ -19,6 +20,8 @@ const BATCH_SIZE = 200;
 const MAX_ATTEMPTS = 3;
 const FTP_TIMEOUT = 60_000;
 const MAX_LISTED_UPLOADS = 20;
+const MIGRATE_TIMEOUT = 120_000;
+const MIGRATE_TOKEN_PLACEHOLDER = '__MIGRATE_TOKEN__';
 
 const CORE_SOURCES = [
     'app',
@@ -358,10 +361,13 @@ function printPlan({ uploads, deletions, keptStale }) {
     }
 }
 
-function splitIndex(uploads) {
+function splitUploads(uploads) {
+    const isIndex = (file) => file.remote === INDEX_PATH;
+
     return {
-        files: uploads.filter((file) => file.remote !== INDEX_PATH),
-        index: uploads.filter((file) => file.remote === INDEX_PATH),
+        core: uploads.filter((file) => file.remote.startsWith(`${CORE_ROOT}/`)),
+        publicFiles: uploads.filter((file) => file.remote.startsWith(`${PUBLIC_ROOT}/`) && !isIndex(file)),
+        index: uploads.filter(isIndex),
     };
 }
 
@@ -379,14 +385,63 @@ async function configFiles(flags) {
     return files;
 }
 
-async function publish(release, plan, remoteManifest, flags, env, slots) {
+async function removeMigrationFile(slot, remotePath) {
+    const client = await ensureConnected(slot);
+
+    await client.remove(remotePath, true);
+
+    if (await remoteFileExists(client, remotePath)) {
+        throw new Error(`Migration dosyası silinemedi: ${remotePath}`);
+    }
+
+    console.log('Migration dosyası silindi.');
+}
+
+async function callMigration(fileName, token, seed) {
+    const response = await fetch(`${SITE_URL}/${fileName}`, {
+        method: 'POST',
+        body: new URLSearchParams({ token, seed: seed ? '1' : '0' }),
+        signal: AbortSignal.timeout(MIGRATE_TIMEOUT),
+    });
+    const output = await response.text();
+
+    console.log(output);
+
+    if (!response.ok || !output.includes('MIGRATE_OK')) {
+        throw new Error(`Migration başarısız (HTTP ${response.status})`);
+    }
+}
+
+async function runMigration(buildDir, slot, seed) {
+    const token = randomBytes(32).toString('hex');
+    const fileName = `_m-${randomBytes(16).toString('hex')}.php`;
+    const remotePath = `${PUBLIC_ROOT}/${fileName}`;
+    const template = await readFile(join(buildDir, 'deploy/migrate.production.php'), 'utf8');
+
+    try {
+        const script = Buffer.from(template.replace(MIGRATE_TOKEN_PLACEHOLDER, token));
+
+        await (await ensureConnected(slot)).uploadFrom(Readable.from(script), remotePath);
+        await callMigration(fileName, token, seed);
+    } finally {
+        await removeMigrationFile(slot, remotePath);
+    }
+}
+
+async function publish(release, plan, remoteManifest, flags, env, slots, buildDir) {
     const startedAt = Date.now();
     const manifest = { ...remoteManifest };
     const sendFiles = createUploader(env, slots);
-    const { files, index } = splitIndex(plan.uploads);
+    const { core, publicFiles, index } = splitUploads(plan.uploads);
 
     await ensureWritableDirs(slots[0].client);
-    await uploadRelease(files, manifest, slots, sendFiles);
+    await uploadRelease(core, manifest, slots, sendFiles);
+
+    if (flags.migrate) {
+        await runMigration(buildDir, slots[0], flags.seed);
+    }
+
+    await uploadRelease(publicFiles, manifest, slots, sendFiles);
     await sendFiles(await configFiles(flags), (file) => console.log(`Yapılandırma yüklendi: ${file.remote}`));
     await uploadRelease(index, manifest, slots, sendFiles);
 
@@ -410,7 +465,13 @@ async function openSlots(env) {
 
 async function main() {
     const args = new Set(process.argv.slice(2));
-    const flags = { dryRun: args.has('--dry-run'), env: args.has('--env'), htaccess: args.has('--htaccess') };
+    const flags = {
+        dryRun: args.has('--dry-run'),
+        env: args.has('--env'),
+        htaccess: args.has('--htaccess'),
+        migrate: args.has('--migrate') || args.has('--seed'),
+        seed: args.has('--seed'),
+    };
 
     if (!flags.dryRun) {
         assertCleanTree();
@@ -430,7 +491,7 @@ async function main() {
             printPlan(plan);
 
             if (!flags.dryRun) {
-                await publish(release, plan, remoteManifest, flags, env, slots);
+                await publish(release, plan, remoteManifest, flags, env, slots, buildDir);
             }
         } finally {
             slots.forEach((slot) => slot.client.close());
