@@ -14,6 +14,7 @@ const CORE_ROOT = '/yaren';
 const PUBLIC_ROOT = '/public_html';
 const MANIFEST_PATH = `${CORE_ROOT}/.deploy-manifest.json`;
 const INDEX_PATH = `${PUBLIC_ROOT}/index.php`;
+const MIGRATIONS_PATH = `${CORE_ROOT}/database/migrations/`;
 
 const CONNECTIONS = 2;
 const BATCH_SIZE = 200;
@@ -438,6 +439,9 @@ async function publish(release, plan, remoteManifest, flags, env, slots, buildDi
     await uploadRelease(core, manifest, slots, sendFiles);
 
     if (flags.migrate) {
+        const staleMigrations = plan.deletions.filter((path) => path.startsWith(MIGRATIONS_PATH));
+
+        await deleteStaleFiles(await ensureConnected(slots[0]), staleMigrations, manifest);
         await runMigration(buildDir, slots[0], flags.seed);
     }
 
