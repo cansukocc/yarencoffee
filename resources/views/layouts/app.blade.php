@@ -7,6 +7,7 @@
         <meta name="description" content="Yâren, geleneksel Türk kahvesini espresso ve modern demleme kültürüyle buluşturan bir kahve markası.">
         <meta name="theme-color" content="#F5F0E6">
         <meta name="color-scheme" content="light">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
         <script>document.documentElement.classList.add('js')</script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -2,7 +2,8 @@
 
 @php
     $id = "field-{$name}";
-    $classes = 'w-full rounded-2xl border border-input bg-cream px-5 py-4 text-coffee placeholder:text-coffee/35 outline-none transition-all focus:border-olive focus:ring-4 focus:ring-olive/15';
+    $error = $errors->first($name);
+    $classes = 'w-full rounded-2xl border bg-cream px-5 py-4 text-coffee placeholder:text-coffee/35 outline-none transition-all focus:border-olive focus:ring-4 focus:ring-olive/15 '.($error ? 'border-destructive' : 'border-input');
 @endphp
 
 <div>
@@ -10,12 +11,12 @@
         {{ $label }}
     </label>
     @if ($textarea)
-        <textarea id="{{ $id }}" name="{{ $name }}" rows="5" aria-invalid="false" {{ $attributes->class([$classes, 'resize-none']) }}></textarea>
+        <textarea id="{{ $id }}" name="{{ $name }}" rows="5" aria-invalid="{{ $error ? 'true' : 'false' }}" @if ($error) aria-describedby="{{ $id }}-error" @endif {{ $attributes->class([$classes, 'resize-none']) }}>{{ old($name) }}</textarea>
     @else
-        <input id="{{ $id }}" name="{{ $name }}" aria-invalid="false" {{ $attributes->class($classes)->merge(['type' => 'text']) }}>
+        <input id="{{ $id }}" name="{{ $name }}" value="{{ old($name) }}" aria-invalid="{{ $error ? 'true' : 'false' }}" @if ($error) aria-describedby="{{ $id }}-error" @endif {{ $attributes->class($classes)->merge(['type' => 'text']) }}>
     @endif
-    <p id="{{ $id }}-error" class="mt-2 flex items-center gap-1.5 text-sm text-destructive" hidden>
+    <p id="{{ $id }}-error" class="mt-2 flex items-center gap-1.5 text-sm text-destructive" @unless ($error) hidden @endunless>
         <x-icon name="circle-alert" class="size-3.5" />
-        <span data-field-error></span>
+        <span data-field-error>{{ $error }}</span>
     </p>
 </div>

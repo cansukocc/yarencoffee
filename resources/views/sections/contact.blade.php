@@ -29,28 +29,42 @@
                 role="status"
                 class="flex h-full flex-col items-start justify-center rounded-[2rem] bg-olive p-8 text-cream animate-in fade-in zoom-in-95 duration-500 md:p-12"
                 data-contact-success
-                hidden
+                @unless (session('contact_success')) hidden @endunless
             >
                 <x-icon name="circle-check" class="size-12" />
                 <h3 class="mt-6 font-serif text-4xl">Mesajınız yolda.</h3>
-                <p class="mt-3 max-w-md leading-relaxed text-cream/85" data-contact-success-message></p>
-                <a href="#iletisim" class="mt-8 text-sm font-semibold underline underline-offset-4" data-contact-reset>
+                <p class="mt-3 max-w-md leading-relaxed text-cream/85" data-contact-success-message>{{ session('contact_success') }}</p>
+                <a href="{{ url('/') }}#iletisim" class="mt-8 text-sm font-semibold underline underline-offset-4" data-contact-reset>
                     Yeni mesaj gönder
                 </a>
             </div>
 
-            <form novalidate class="rounded-[2rem] bg-card p-6 shadow-[0_30px_60px_-40px_rgba(59,36,24,0.5)] md:p-10" data-contact-form>
-                <div role="alert" class="mb-6 flex items-start gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive" data-contact-alert hidden>
+            <form
+                method="POST"
+                action="{{ route('contact.store') }}"
+                novalidate
+                class="rounded-[2rem] bg-card p-6 shadow-[0_30px_60px_-40px_rgba(59,36,24,0.5)] md:p-10"
+                data-contact-form
+                @if (session('contact_success')) hidden @endif
+            >
+                @csrf
+
+                <div role="alert" class="mb-6 flex items-start gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive" data-contact-alert @unless ($errors->any()) hidden @endunless>
                     <x-icon name="circle-alert" class="mt-0.5 size-4 shrink-0" />
-                    <span data-contact-alert-message></span>
+                    <span data-contact-alert-message>{{ $errors->any() ? 'Formda birkaç eksik var, lütfen kontrol edin.' : '' }}</span>
+                </div>
+
+                <div class="sr-only" aria-hidden="true">
+                    <label for="field-website">Web siteniz</label>
+                    <input id="field-website" type="text" name="website" tabindex="-1" autocomplete="off">
                 </div>
 
                 <div class="grid gap-5 md:grid-cols-2">
-                    <x-field label="Ad" name="name" placeholder="Adınız" autocomplete="name" />
-                    <x-field label="E-posta" name="email" type="email" placeholder="ornek@eposta.com" autocomplete="email" />
+                    <x-field label="Ad" name="name" placeholder="Adınız" autocomplete="name" maxlength="120" />
+                    <x-field label="E-posta" name="email" type="email" placeholder="ornek@eposta.com" autocomplete="email" maxlength="200" />
                 </div>
                 <div class="mt-5">
-                    <x-field label="Mesaj" name="message" placeholder="Aklınızdan geçenleri yazın…" textarea />
+                    <x-field label="Mesaj" name="message" placeholder="Aklınızdan geçenleri yazın…" maxlength="2000" textarea />
                 </div>
 
                 <button

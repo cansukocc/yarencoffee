@@ -2,6 +2,8 @@
 
 return [
 
+    'contact_recipient' => env('CONTACT_RECIPIENT'),
+
     'links' => [
         ['href' => '#hikayemiz', 'label' => 'Hikâyemiz'],
         ['href' => '#kahveler', 'label' => 'Kahveler'],

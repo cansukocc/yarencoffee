@@ -2,9 +2,15 @@ export function initProductInquiry() {
     const contact = document.querySelector('#iletisim');
     const nameField = document.querySelector('#field-name');
     const messageField = document.querySelector('#field-message');
+    const form = document.querySelector('[data-contact-form]');
+    const resetLink = document.querySelector('[data-contact-reset]');
 
     document.querySelectorAll('[data-product-inquiry]').forEach((button) => {
         button.addEventListener('click', () => {
+            if (form.hidden) {
+                resetLink.click();
+            }
+
             if (messageField.value.trim() === '') {
                 messageField.value = `Merhaba, ${button.dataset.productInquiry} hakkında bilgi almak istiyorum.`;
             }
