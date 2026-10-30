@@ -1,3 +1,4 @@
+import { initAnimations } from './modules/animations';
 import { initContactForm } from './modules/contact';
 import { initFortune } from './modules/fortune';
 import { initHeader } from './modules/header';
@@ -9,3 +10,6 @@ initReveal();
 initFortune();
 initProductInquiry();
 initContactForm();
+initAnimations();
+
+window.yarenReady = true;

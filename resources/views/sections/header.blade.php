@@ -9,9 +9,9 @@
         <ul class="hidden items-center gap-10 md:flex">
             @foreach (config('yaren.links') as $link)
                 <li>
-                    <a href="{{ $link['href'] }}" class="group relative text-sm font-medium text-coffee/80 transition-colors hover:text-coffee">
+                    <a href="{{ $link['href'] }}" class="group relative text-sm font-medium text-coffee/80 transition-colors hover:text-coffee" data-nav-link>
                         {{ $link['label'] }}
-                        <span class="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 scale-0 rounded-full bg-olive transition-transform duration-300 group-hover:scale-100"></span>
+                        <span class="absolute -bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 scale-0 rounded-full bg-olive transition-transform duration-300 group-hover:scale-100 group-aria-[current]:scale-100"></span>
                     </a>
                 </li>
             @endforeach

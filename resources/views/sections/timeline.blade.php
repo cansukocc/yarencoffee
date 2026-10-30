@@ -15,17 +15,23 @@
             </p>
         </x-reveal>
 
-        <div class="relative mt-16">
+        <div class="relative mt-16" data-timeline>
             <span
                 aria-hidden="true"
                 class="absolute left-[2.25rem] top-0 h-full w-px border-l border-dashed border-cream/25 md:left-0 md:top-[2.25rem] md:h-px md:w-full md:border-l-0 md:border-t"
+            ></span>
+            <span
+                aria-hidden="true"
+                class="absolute left-[2.25rem] top-0 h-full w-px origin-top bg-[#a9ad7e] md:left-0 md:top-[2.25rem] md:h-px md:w-full md:origin-left"
+                data-timeline-fill
             ></span>
 
             <ol class="grid gap-12 md:grid-cols-3 md:gap-8">
                 @foreach (config('yaren.timeline') as $step)
                     <x-reveal as="li" :delay="$loop->index * 180" class="relative pl-24 md:pl-0">
-                        <span class="absolute left-0 top-0 flex size-18 items-center justify-center rounded-full border border-cream/25 bg-coffee font-serif text-2xl italic md:relative">
+                        <span class="absolute left-0 top-0 flex size-18 items-center justify-center rounded-full border border-cream/25 bg-coffee font-serif text-2xl italic md:relative" data-timeline-badge>
                             0{{ $loop->iteration }}
+                            <span aria-hidden="true" class="absolute -inset-px rounded-full border-2 border-[#a9ad7e] opacity-0" data-timeline-ring></span>
                         </span>
                         <div class="md:mt-8">
                             <div class="group relative aspect-[4/3] overflow-hidden rounded-t-[999px] rounded-b-3xl bg-cream">

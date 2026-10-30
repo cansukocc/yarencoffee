@@ -15,6 +15,7 @@
   --color-cream: var(--cream);
   --color-coffee: var(--coffee);
   --color-olive: var(--olive);
+  --color-olive-ink: var(--olive-ink);
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -48,6 +49,7 @@
   --cream: #f5f0e6;
   --coffee: #3b2418;
   --olive: #6b7045;
+  --olive-ink: #656a41;
 
   --background: var(--cream);
   --foreground: var(--coffee);
@@ -84,6 +86,14 @@
   ::selection {
     background: var(--olive);
     color: var(--cream);
+  }
+  :focus-visible {
+    outline: 2px solid var(--olive);
+    outline-offset: 2px;
+  }
+  .bg-coffee :focus-visible,
+  .bg-olive :focus-visible {
+    outline-color: var(--cream);
   }
 }
 
@@ -156,8 +166,25 @@
   transform: none;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-hero-item],
+  .js [data-hero-letter],
+  .js [data-word],
+  .js [data-timeline-fill] {
+    opacity: 0;
+  }
+  .js [data-hero-image] {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .grain::after { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grain::after, .steam, .float-slow, .marquee, .spin-slow { animation: none; }
+  .animate-in, [data-fortune-stage] { animation: none !important; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }

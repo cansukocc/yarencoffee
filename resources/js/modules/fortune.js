@@ -1,3 +1,5 @@
+import { createFortuneAnimator } from './animations/fortune';
+
 const READING_DURATION = 1600;
 const WIGGLE_CLASS = 'animate-[wiggle_0.4s_ease-in-out_4]';
 const LIFTED_TRANSFORM = 'translate(18px, -34px) rotate(-10deg)';
@@ -17,7 +19,19 @@ export function initFortune() {
     const readIcon = section.querySelector('[data-fortune-icon="read"]');
     const againIcon = section.querySelector('[data-fortune-icon="again"]');
 
+    const animator = createFortuneAnimator(section);
+
     let index = 0;
+
+    const moveCup = (lifted) => {
+        if (!animator) {
+            cup.style.transform = lifted ? LIFTED_TRANSFORM : 'none';
+        } else if (lifted) {
+            animator.lift();
+        } else {
+            animator.lower();
+        }
+    };
 
     const setPhase = (phase) => {
         const done = phase === 'done';
@@ -32,7 +46,7 @@ export function initFortune() {
         againIcon.toggleAttribute('hidden', !done);
 
         stage.classList.toggle(WIGGLE_CLASS, phase === 'reading');
-        cup.style.transform = done ? LIFTED_TRANSFORM : 'none';
+        moveCup(done);
         telve.classList.toggle('opacity-100', done);
         telve.classList.toggle('opacity-0', !done);
     };

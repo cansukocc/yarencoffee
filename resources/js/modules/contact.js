@@ -1,8 +1,11 @@
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { createContactAnimator } from './animations/contact';
+
+const EMAIL_PATTERN =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const FORM_ERROR = 'Formda birkaç eksik var, lütfen kontrol edin.';
 const RATE_LIMIT_ERROR = 'Çok fazla deneme yaptınız, lütfen biraz sonra tekrar deneyin.';
 const SEND_ERROR = 'Mesajınız gönderilemedi, lütfen tekrar deneyin.';
+const SESSION_ERROR = 'Oturum süreniz doldu, sayfayı yenileyip tekrar deneyin.';
 
 const RULES = {
     name: { isValid: (value) => value.length >= 2, message: 'Lütfen adınızı yazın.' },
@@ -25,6 +28,7 @@ export function initContactForm() {
     const fields = Object.fromEntries(FIELD_NAMES.map((name) => [name, form.elements[name]]));
     const honeypot = form.elements.website;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    const animator = createContactAnimator(form, success);
 
     const showAlert = (message) => {
         alertMessage.textContent = message;
@@ -83,8 +87,7 @@ export function initContactForm() {
 
     const showSuccess = (message) => {
         successMessage.textContent = message;
-        form.hidden = true;
-        success.hidden = false;
+        animator.showSuccess();
     };
 
     const showForm = () => {
@@ -94,8 +97,7 @@ export function initContactForm() {
         });
         honeypot.value = '';
         hideAlert();
-        success.hidden = true;
-        form.hidden = false;
+        animator.showForm();
     };
 
     const handleResponse = async (response) => {
@@ -107,6 +109,8 @@ export function initContactForm() {
             const { errors } = await response.json();
 
             showErrors(Object.fromEntries(Object.entries(errors).map(([name, messages]) => [name, messages[0]])));
+        } else if (response.status === 419) {
+            showAlert(SESSION_ERROR);
         } else if (response.status === 429) {
             showAlert(RATE_LIMIT_ERROR);
         } else {

@@ -1,21 +1,21 @@
 <section class="relative -mt-18 overflow-hidden pt-18">
     <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 pt-10 md:grid-cols-12 md:px-10 md:pb-24 md:pt-16">
         <div class="relative z-10 md:col-span-6">
-            <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-olive/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-olive animate-in fade-in slide-in-from-bottom-2 duration-700">
+            <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-olive/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-olive-ink" data-hero-item>
                 <span class="size-1.5 rounded-full bg-olive"></span>
                 {{ $settings['hero_badge'] }}
             </p>
-            <h1 class="font-serif text-[22vw] leading-[0.85] font-light tracking-tight text-coffee md:text-[11rem] animate-in fade-in slide-in-from-bottom-6 duration-1000">
-                Yâren
+            <h1 aria-label="Yâren" class="font-serif text-[22vw] leading-[0.85] font-light tracking-tight text-coffee md:text-[11rem]">
+                <span aria-hidden="true">@foreach (mb_str_split('Yâren') as $letter)<span @class(['inline-block', '-ml-[0.06em]' => $loop->index === 1]) data-hero-letter>{{ $letter }}</span>@endforeach</span>
             </h1>
-            <p class="mt-6 max-w-md font-serif text-3xl italic leading-tight text-coffee md:text-4xl animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-both">
+            <p class="mt-6 max-w-md font-serif text-3xl italic leading-tight text-coffee md:text-4xl" data-hero-item>
                 {{ $settings['slogan'] }}
             </p>
-            <p class="mt-5 max-w-md text-base leading-relaxed text-coffee/70 animate-in fade-in duration-1000 delay-300 fill-mode-both">
+            <p class="mt-5 max-w-md text-base leading-relaxed text-coffee/70" data-hero-item>
                 {{ $settings['hero_subtitle'] }}
             </p>
-            <div class="mt-9 flex flex-wrap items-center gap-4 animate-in fade-in duration-1000 delay-500 fill-mode-both">
-                <a href="#kahveler" class="group inline-flex items-center gap-3 rounded-full bg-olive py-2 pl-7 pr-2 text-sm font-semibold text-cream transition-all hover:bg-coffee">
+            <div class="mt-9 flex flex-wrap items-center gap-4" data-hero-item>
+                <a href="#kahveler" class="group inline-flex items-center gap-3 rounded-full bg-olive py-2 pl-7 pr-2 text-sm font-semibold text-cream transition-colors hover:bg-coffee" data-magnetic>
                     Kahveleri Keşfet
                     <span class="inline-flex size-10 items-center justify-center rounded-full bg-cream text-olive transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-coffee">
                         <x-icon name="arrow-down" class="size-4" />
@@ -38,6 +38,8 @@
                         loading="eager"
                         fetchpriority="high"
                         class="absolute inset-0 size-full object-cover"
+                        data-hero-image
+                        data-parallax
                     >
                 </div>
 

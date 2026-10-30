@@ -12,6 +12,7 @@
                         loading="lazy"
                         decoding="async"
                         class="absolute inset-0 size-full object-cover"
+                        data-parallax
                     >
                 </div>
                 <div class="relative mt-6 flex items-center justify-between text-cream">
@@ -23,11 +24,15 @@
 
         <div class="order-1 flex flex-col justify-center md:order-2">
             <x-reveal>
-                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive">Hikâyemiz</p>
-                <h2 class="mt-5 text-balance font-serif text-5xl leading-[1.02] text-coffee md:text-7xl">
-                    Gelenek ile <em class="text-olive">bugün</em> aynı masada.
-                </h2>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive-ink">Hikâyemiz</p>
             </x-reveal>
+            <h2 class="mt-5 text-balance font-serif text-5xl leading-[1.02] text-coffee md:text-7xl" data-words>
+                <span class="inline-block" data-word>Gelenek</span>
+                <span class="inline-block" data-word>ile</span>
+                <em class="inline-block text-olive" data-word>bugün</em>
+                <span class="inline-block" data-word>aynı</span>
+                <span class="inline-block" data-word>masada.</span>
+            </h2>
             <x-reveal :delay="150">
                 <p class="mt-8 max-w-lg text-pretty text-lg leading-relaxed text-coffee/75">
                     Yâren, büyükannelerimizin bakır cezvesinde köpürttüğü kahveyle başladı. O kokuyu, o sabrı ve

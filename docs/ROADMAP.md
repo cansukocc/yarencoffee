@@ -8,6 +8,6 @@
 - [x] 4. Veritabanı ve ön yüz bağlantısı
 - [x] 5. İletişim formu ve e-posta
 - [x] 6. Yönetim paneli
-- [ ] 7. Animasyon, mobil, erişilebilirlik, performans
+- [x] 7. Animasyon, mobil, erişilebilirlik, performans
 - [ ] 8. Son canlı yayın ve doğrulama
 - [ ] 9. README, temizlik, son push

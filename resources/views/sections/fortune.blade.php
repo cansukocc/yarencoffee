@@ -5,7 +5,7 @@
             <div aria-hidden="true" class="absolute -right-10 -top-10 size-44 rounded-full border border-olive/20"></div>
 
             <div class="relative">
-                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive">Bir kahvenin kırk yıl hatırı</p>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive-ink">Bir kahvenin kırk yıl hatırı</p>
                 <h2 id="fal-title" class="mt-5 font-serif text-5xl leading-none text-coffee md:text-7xl">
                     Telve <em class="text-olive">Falı</em>
                 </h2>
@@ -14,10 +14,10 @@
                 </p>
 
                 <div aria-live="polite" class="mt-8 min-h-32">
-                    <p class="font-serif text-2xl italic text-coffee/40" data-fortune-panel="idle">Fincanın seni bekliyor.</p>
+                    <p class="font-serif text-2xl italic text-coffee/60" data-fortune-panel="idle">Fincanın seni bekliyor.</p>
                     <p class="font-serif text-2xl italic text-coffee/70" data-fortune-panel="reading" hidden>Fincan soğuyor, telve konuşuyor…</p>
                     <div class="animate-in fade-in slide-in-from-bottom-3 duration-700 rounded-3xl bg-cream p-6 shadow-[0_20px_40px_-25px_rgba(59,36,24,0.5)]" data-fortune-panel="done" hidden>
-                        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive">Telvede: <span data-fortune-symbol></span></p>
+                        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive-ink">Telvede: <span data-fortune-symbol></span></p>
                         <p class="mt-3 font-serif text-2xl leading-snug text-coffee" data-fortune-text></p>
                     </div>
                 </div>
@@ -27,6 +27,7 @@
                         type="button"
                         class="inline-flex items-center gap-2 rounded-full bg-olive px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-coffee disabled:opacity-60"
                         data-fortune-button
+                        data-magnetic
                     >
                         <x-icon name="sparkles" class="size-4" data-fortune-icon="read" />
                         <x-icon name="rotate-ccw" class="size-4" data-fortune-icon="again" hidden />
@@ -37,7 +38,7 @@
 
             <div class="relative flex justify-center py-6">
                 <div class="relative transition-transform duration-[1600ms] ease-[cubic-bezier(0.6,0,0.2,1)]" data-fortune-stage>
-                    <svg viewBox="0 0 260 240" class="w-64 md:w-80" role="img" aria-label="Tabağa ters kapatılmış kahve fincanı">
+                    <svg viewBox="0 0 260 240" class="w-64 overflow-visible md:w-80" role="img" aria-label="Tabağa ters kapatılmış kahve fincanı">
                         <ellipse cx="130" cy="205" rx="118" ry="22" fill="#3B2418" opacity="0.15" />
                         <ellipse cx="130" cy="198" rx="112" ry="20" fill="#F5F0E6" stroke="#3B2418" stroke-width="2" />
                         <ellipse cx="130" cy="196" rx="70" ry="10" fill="none" stroke="#6B7045" stroke-width="1.5" stroke-dasharray="3 5" />
@@ -52,7 +53,7 @@
                             <path d="M188 120 C216 116 222 160 190 160" fill="none" stroke="#3B2418" stroke-width="2" />
                             <ellipse cx="130" cy="192" rx="58" ry="5" fill="#3B2418" opacity="0.2" />
                         </g>
-                        <g fill="none" stroke="#3B2418" stroke-width="1.5" stroke-linecap="round" opacity="0.35">
+                        <g fill="none" stroke="#3B2418" stroke-width="1.5" stroke-linecap="round" opacity="0.35" data-fortune-steam>
                             <path d="M110 50 c-8 -10 8 -16 0 -28" />
                             <path d="M150 50 c-8 -10 8 -16 0 -28" />
                         </g>

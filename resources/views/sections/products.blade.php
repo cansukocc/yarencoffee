@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-7xl px-5 md:px-10">
         <x-reveal class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive">Kahvelerimiz</p>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-olive-ink">Kahvelerimiz</p>
                 <h2 class="mt-5 font-serif text-5xl leading-none text-coffee md:text-7xl">
                     Üç fincan, <em class="text-olive">üç ritüel.</em>
                 </h2>
@@ -15,7 +15,7 @@
         <ul class="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
             @foreach ($products as $product)
                 <x-reveal as="li" :delay="$loop->index * 120">
-                    <article class="group flex h-full flex-col rounded-[2rem] bg-card p-3 shadow-[0_1px_0_0_var(--border)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-30px_rgba(59,36,24,0.4)]">
+                    <article class="group flex h-full flex-col rounded-[2rem] bg-card p-3 shadow-[0_1px_0_0_var(--border)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-30px_rgba(59,36,24,0.4)]" data-tilt>
                         <div class="relative aspect-square overflow-hidden rounded-t-[999px] rounded-b-[1.5rem] bg-secondary">
                             <img
                                 src="{{ asset($product->image) }}"
