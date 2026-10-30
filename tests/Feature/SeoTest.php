@@ -130,6 +130,11 @@ class SeoTest extends TestCase
         $this->assertStringNotContainsString('yonetim', $response->getContent());
     }
 
+    public function test_sitemap_view_has_no_php_open_tag(): void
+    {
+        $this->assertStringNotContainsString('<?', file_get_contents(resource_path('views/sitemap.blade.php')));
+    }
+
     public function test_sitemap_lastmod_follows_latest_change(): void
     {
         Product::query()->update(['updated_at' => '2026-01-01 10:00:00']);

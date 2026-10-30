@@ -9,14 +9,18 @@ use Illuminate\Support\Carbon;
 
 class SitemapController extends Controller
 {
+    private const XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>';
+
     public function __invoke(): Response
     {
         $lastModified = collect([Product::query()->max('updated_at'), Setting::query()->max('updated_at')])
             ->filter()
             ->max();
 
-        return response()
-            ->view('sitemap', ['lastModified' => $lastModified ? Carbon::parse($lastModified)->toAtomString() : null])
-            ->header('Content-Type', 'application/xml');
+        $urlSet = view('sitemap', [
+            'lastModified' => $lastModified ? Carbon::parse($lastModified)->toAtomString() : null,
+        ])->render();
+
+        return response(self::XML_DECLARATION."\n".$urlSet)->header('Content-Type', 'application/xml');
     }
 }
